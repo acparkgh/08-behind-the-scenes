@@ -46,6 +46,7 @@ var me = "Jonas";
 console.log(addDecl(3, 5));
 
 function addDecl(a, b) {
+  console.log(this);
   return a + b;
 };
 
@@ -61,3 +62,30 @@ const addArrow = (a, b) => {
 };
 
 console.log(addArrow(5, 6));
+
+const jonas = {
+  name: 'Jonas',
+  year: 1989,
+  calcAge: function () {
+    console.log(this);
+    return 2037 - this.year
+  }
+}
+
+// console.log(jonas.calcAge());
+// console.log(this);
+
+const matilda = {
+  year: 1971
+}
+
+matilda.calcAge = jonas.calcAge;
+console.log(jonas);
+console.log(matilda);
+
+matilda.calcAge();
+
+const f = jonas.calcAge;
+console.log(f);
+
+f();
